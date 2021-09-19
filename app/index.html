@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            margin: 2px;
+            text-align: center;
+        }
+        body{
+            padding: 20px;
+        }
+    </style>
+    <script>
+        const { ipcRenderer } = require('electron')
+        function startserver(){
+            if (document.getElementById("fold").value.length < 1|| document.getElementById("port").value.length < 1){
+                return document.getElementById("btns").innerHTML = `<input id="fold" type="text" placeholder="Folder location" /><br><input id="port" type="number" placeholder="port" value="80" /><br><p>Port and/or folder is missing<p><button onclick=\"startserver()\">Start Host</button>`
+            }
+            ipcRenderer.send('startserver', document.getElementById("fold").value, document.getElementById("port").value)
+            document.getElementById("btns").innerHTML = "To stop the server, just close the window !<br>Server is running on <a href=\"http://localhost:"+document.getElementById("port").value+"\" target=_blank>http://localhost:"+document.getElementById("port").value+"</a>"
+        }
+    </script>
+</head>
+<body>
+    <img draggable="false" src="lgoo.png" style="height: 159px;">
+    <div id="btns">
+        <input id="fold" type="text" placeholder="Folder location" style="background-color: none; border: none; border-bottom: solid 2px black; padding-bottom: 1px;" /><br>
+        <input id="port" type="number" placeholder="port" value="80" style="background-color: none; border: none; border-bottom: solid 2px black; padding-bottom: 1px;" /><br><br>
+        <button onclick="startserver()" style="border: none; padding: 5px; background-color: rgb(248, 99, 99);">Start Host</button>
+    </div>
+</body>
+</html>

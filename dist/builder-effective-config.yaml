@@ -1,0 +1,35 @@
+directories:
+  output: dist
+  buildResources: build
+appId: LocHost
+productName: Lochost
+artifactName: '${productName}-setup-${version}.${ext}'
+copyright: Copyright © 2021 East Wind Apps
+win:
+  target:
+    - target: nsis
+      arch: x64
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+mac:
+  target: dmg
+  category: public.app-category.developer-tools
+linux:
+  target: AppImage
+  maintainer: stereo18
+  vendor: stereo18
+  synopsis: Easy http server
+  description: A simple HTTP/CSS/JS localhost server
+  category: Utility
+compression: maximum
+files:
+  - filter:
+      - '!{dist,.gitignore,.vscode,docs,dev-app-update.yml,.travis.yml,.nvmrc,.eslintrc.json,build.js,iconpack}'
+extraResources:
+  - filter:
+      - libraries
+asar: true
+electronVersion: 11.1.0
